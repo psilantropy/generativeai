@@ -1,6 +1,6 @@
-alias: FRIGATE / Generative AI Tests
+alias: FRIGATE / Generative AI / Notification
 description: ""
-# Change the trigger to suit yourself. This is a test for me.
+# Change the treigger to suit yourself. Not sure what works best for me yet.
 trigger:
   - platform: mqtt
     topic: frigate/events
@@ -10,14 +10,14 @@ action:
   - service: camera.snapshot
     metadata: {}
     data:
-      filename: www/frontlatest.jpg
+      filename: www/latest_front.jpg
     target:
       entity_id: camera.front
 # You need to add the generative AI integration first.
   - service: google_generative_ai_conversation.generate_content
     metadata: {}
     data:
-      image_filename: www/frontlatest.jpg
+      image_filename: www/latest_front.jpg
       prompt: >-
         Very briefly describe what you see in this image, but only if the image
         has a person or a dog in it,  from my front gate security camera. Your
@@ -32,10 +32,9 @@ action:
         entity_id: camera.front
         push:
           category: camera
-# This is for an android (image only)
   - service: notify.mobile_app_yourandroid
     data:
-  message: " {{ generated_content.text }} "
+      message: " {{ generated_content.text }} "
       data:
         image: local/latest_front.jpg
 mode: single
