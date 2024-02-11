@@ -25,11 +25,17 @@ action:
         stationary objects or buildings or the black gate and black letterbox.
     response_variable: generated_content
 # This is set up for an iPhone using the camera entity
-  - service: notify.mobile_app_yourmobilephone
+  - service: notify.mobile_app_youriphone
     data:
       message: " {{ generated_content.text }} "
       data:
         entity_id: camera.front
         push:
           category: camera
+# This is for an android (image only)
+  - service: notify.mobile_app_yourandroid
+    data:
+  message: " {{ generated_content.text }} "
+      data:
+        image: local/latest_front.jpg
 mode: single
