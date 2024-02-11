@@ -1,5 +1,6 @@
 alias: FRIGATE / Generative AI Tests
 description: ""
+# Change the trigger to suit yourself. This is a test for me.
 trigger:
   - platform: mqtt
     topic: frigate/events
@@ -12,6 +13,7 @@ action:
       filename: www/frontlatest.jpg
     target:
       entity_id: camera.front
+# You need to add the generative AI integration first.
   - service: google_generative_ai_conversation.generate_content
     metadata: {}
     data:
